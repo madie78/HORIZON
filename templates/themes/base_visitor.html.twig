@@ -17,6 +17,7 @@
         <meta name="keywords" content ="{% block keywords %}{% endblock %}">
         
         {#===============FAVICON=============#}
+        {# {# <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"> #}
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -29,6 +30,9 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         
         {#============ GOGGLE FONT=========#}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rampart+One&display=swap" rel="stylesheet">
 
 
         {# =========APRES INTALLATION DE WEBPACKENCORE========= #}
@@ -42,34 +46,35 @@
     </head>
     <body class="body-visitor">
         {# Barre de navigation #}
-        <nav class="navbar navbar-expand-lg bg-dark navbar-dark shadow-sm fixed-top">
+        <nav class="navbar navbar-expand-lg bg-primary navbar-dark shadow-sm fixed-top">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{{path("visitor_welcome_index")}}"><span class="text-warning">H<i class="fa-regular fa-sun">rizon</i></span></a>
+                <a class="navbar-brand" href="{{path("visitor_welcome_index")}}"><span class="text-warning display-6">H<i class="fa-regular fa-sun"></i>rizon</span></a>
+                
                 {# Bouton responsive (burger) #}
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
 
             {# LIENS de la barre de navigation #}
-                <div class ="collapse navbar-collapse" id=" navbarNav">
+                <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mx-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{{path("visitor_welcome_index")}}">Home</a>
+                        <li class="nav-item ">
+                            <a class="nav-link text-white golden-active" href="{{path("visitor_welcome_index")}}">Home</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="{{path("visitor_catalog_index")}}">boutique</a>
+                            <a class="nav-link text-white" href="{{path("visitor_catalog_index")}}">boutique</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="{{path("visitor_promotion_index")}}">Promotion</a>
+                            <a class="nav-link text-white" href="{{path("visitor_promotion_index")}}">Promotion</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="{{path("visitor_contact_create")}}">Contact</a>
+                            <a class="nav-link text-white" href="{{path("visitor_contact_create")}}">Contact</a>
                         </li>
                     <li class="my-3 my-lg-0 mx-lg-3">
                     {# place du formulaire #}
                     </li>
                     <li class=" nav-item">
-                        <a class="nav-link" href="{{path("visitor_cart_index")}}"><i class="fa-solid fa-cart-shopping"></i> Mon panier</a>
+                        <a class="nav-link text-white" href="{{path("visitor_cart_index")}}"><i class="fa-solid fa-cart-shopping"></i> Mon panier</a>
                     </li>
                 </ul>
                 {# {% if app.user %} #}
@@ -95,7 +100,7 @@
                 </ul>
                     {# {% else %} #}
                         <a href="" class="btn btn-warning my-3 my-lg-0">Connexion</a>
-                        <a href="" class="btn btn-light my-3 my-lg-0 mx-lg-2">Inscription</a>
+                        <a href="{{path("visitor_registration_register")}}" class="btn btn-light my-3 my-lg-0 mx-lg-2">Inscription</a>
                     {# {% endif %} #}
                 </div>
             </div>
@@ -119,7 +124,9 @@
                         <h4>Boutique</h4>
                         <ul class="list-unstyled">
                             <li><a href="" class="text-decoration-none text-white">Accueil</a></li>
+                            <li><a href="" class="text-decoration-none text-white">FAQ</a></li>
                             <li><a href="" class="text-decoration-none text-white">Contact</a></li>
+                            <li><a href="" class="text-decoration-none text-white">Qui sommes-nous</a></li>
                         </ul>
                     </div>
                     {#======================Réseaux sociaux================= #}

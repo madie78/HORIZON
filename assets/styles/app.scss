@@ -1,7 +1,10 @@
 // assets/styles/global.scss
 
 // customize some Bootstrap variables
-$primary: darken(#428bca, 20%);
+//abstracts
+@import"./abstracts/variables";
+@import"./abstracts/classes";
+
 
 // the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
@@ -10,4 +13,7 @@ $primary: darken(#428bca, 20%);
 @import"./base/typography";
 
 // Themes
-@import"./themes/base_visitor"
+@import"./themes/base_visitor";
+
+
+

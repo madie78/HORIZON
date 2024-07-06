@@ -1,0 +1,7 @@
+{{form_start(form,{'attr':{'class':'d-flex', 'method':'GET','action':path('app_search')}})}} 
+    {{form_widget(form.category,{'attr':{'class':'form-control rounded-0 rounded-start bg-light w-75'}}) }}
+    {{form_widget(form.keywords,{'attr':{'class':'form-control et-input-navbar-visitor rounded-0 rounded'}}) }}
+    <button id="search-button" type="submit" class="btn btn-primary rounded-0 rounded-end-3">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
+{{form_end(form)}}
