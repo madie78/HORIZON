@@ -4,11 +4,15 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+#[UniqueEntity(fields: ['email'], message: 'Vous ne pouvez pas créer de compte avec cet email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
 //-----------IDENTIFIANT------------------
@@ -18,14 +22,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
 //-----------PRENOM------------------
+    #[Assert\NotBlank(message:"Le prénom est obligatoire")]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: 'Le prénom ne doit pas dépasser {{ limit }} caractères.',
+    )]
+    #[Assert\Regex(
+        pattern: "/^[0-9a-zA-Z-_' áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+$/i",
+        match: true,
+        message: "Seuls les chiffres, les lettres, l'undescore et tiret sont autirisés pour le prénom.",
+    )]
     #[ORM\Column(length: 255)]
     private ?string $firstName = null;
 
 //-----------NOM------------------
+    #[Assert\NotBlank(message:"Le nom est obligatoire")]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: 'Le nom ne doit pas dépasser {{ limit }} caractères.',
+    )]
+    #[Assert\Regex(
+        pattern: "/^[0-9a-zA-Z-_' áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]+$/i",
+        match: true,
+        message: "Seuls les chiffres, les lettres, l'undescore et tiret sont autirisés pour le nom.",
+    )]
     #[ORM\Column(length: 255)]
     private ?string $lastName = null;
 
 //-----------EMAIL  DOIT ETRE UNIQUE------------------
+    #[Assert\NotBlank(message:"L'email est obligatoire")]
+    #[Assert\Length(
+        max: 180,
+        maxMessage: 'Le nom ne doit pas dépasser {{ limit }} caractères.',
+    )]
+    #[Assert\Email(
+        message: "l'email {{ value }} n'est pas valide.",
+    )]
     #[ORM\Column(length: 180)]
     private ?string $email = null;
 
@@ -40,18 +72,43 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      */
+    #[Assert\NotBlank(message: "Le mot de passe est obligatoire.")]
+    #[Assert\Length(
+        min: 12,
+        max: 255,
+        minMessage: 'le mot de passe doit contenir au minimum {{ limit }} caractères',
+        maxMessage: 'le mot de passe doit contenir au maximum {{ limit }} caractères',
+    )]
+    #[Assert\Regex(
+        pattern: "/^(?=.*[a-zà-ÿ])(?=.*[A-ZÀ-Ỳ])(?=.*[0-9])(?=.*[^a-zà-ÿA-ZÀ-Ỳ0-9]).{11,255}$/",
+        match: true,
+        message: "Le mot de passe doit contentir au moins une lettre miniscule, majuscule, un chiffre et un caractère spécial.",
+    )]
+    #[Assert\NotCompromisedPassword(message: "Ce mot de passe n'est pas sûr, veuillez en choisir un autre")]
     #[ORM\Column]
     private ?string $password = null;
 
 //-----------DATE DE CREATION/MODIFICATION/VERIFICATION------------------
+    #[Gedmo\Timestampable(on: 'create')]
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $verifiedAt = null;
 
+    #[Gedmo\Timestampable(on: 'update')]
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
+
+    #[ORM\Column]
+    private bool $isVerified = false;
+
+    // ---------Récuperer le tableau des roles et y inserer le role USER
+
+    public function __construct()
+    {
+        $this->roles[] ="ROLE_USER";
+    }
 
 //----------les accesseurs et les mutateurs------------
 // ---GET/SET----------- AFFICHER ET ATTRIBUER
@@ -186,6 +243,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUpdatedAt(?\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setVerified(bool $isVerified): static
+    {
+        $this->isVerified = $isVerified;
 
         return $this;
     }

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        {#============ ENCODAGE DES CARACTERES======#}
+        <meta charset="UTF-8">
+
+        {#=========Minimum de responsive design======#}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        {#============ TITRE DE LA PAGE===============#}
+        <title>{% block title %}{% endblock %}-Horizon</title>
+        
+        {# ==============SEO================ #}
+        <meta name="robots" content ="index, allow">
+        <meta name="description" content ="{% block description %}{% endblock %}">
+        <meta name="keywords" content ="{% block keywords %}{% endblock %}">
+        
+        {#===============FAVICON=============#}
+        {# {# <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"> #}
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
+        
+        {#============ FONT AWESOME=========#}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        
+        {#============ GOGGLE FONT=========#}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Rampart+One&display=swap" rel="stylesheet">
+
+
+        {# =========APRES INTALLATION DE WEBPACKENCORE========= #}
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    <body class="body-visitor">
+    
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    <div class="container my-5  ">
+        <div class="row">
+            <div>
+            <a class="navbar-brand" href="{{path("visitor_welcome_index")}}"><span class="text-warning display-4">H<i class="fa-regular fa-sun"></i>rizon</span></a>
+            </div>
+            <div class="col-lg-6  text-center ">
+                <img src="./online-store-76.png" alt="Image description" class="img-fluid">
+            </div>
+            <div class="col-lg-5  ">
+    {{ form_start(registrationForm) }}
+            <div class="row ">
+            <div class="mb-4 col-md-6 ">
+                <Label for="registration_form_firstName">Prénom</Label>
+                {{ form_widget(registrationForm.firstName, {'attr': {'class':'form-control','autofocus':'autofocus'}}) }} 
+                <div class="text-danger ">{{ form_errors(registrationForm.firstName) }}</div>
+            </div>
+            <div class="mb-4 col-md-6">
+                <Label for="registration_form_lasttName">Nom</Label>
+                {{ form_widget(registrationForm.lastName, {'attr': {'class':'form-control'}}) }}
+                <div class="text-danger ">{{ form_errors(registrationForm.lastName) }}</div>
+            </div>
+            <div class="mb-4 ">
+                <Label for="registration_form_email">Email</Label>
+                {{ form_widget(registrationForm.email, {'attr': {'class':'form-control'}}) }}
+                <div class="text-danger ">{{ form_errors(registrationForm.email) }}</div>
+            </div>
+            <div class="mb-4 ">
+                <Label for="registration_form_password_first">mot de passe</Label>
+                {{ form_widget(registrationForm.password.first, {'attr': {'class':'form-control', 'placeholder':'au moins 12 caractères'}}) }}
+                <div class="text-danger ">{{ form_errors(registrationForm.password.first) }}</div>
+                <small><em>Le mot de passe doit contenir au moins une lettre majuscule, minuscule, un chiffre et un caractère spécial.</em></small>
+            </div>
+            <div class="mb-4 ">
+                <Label for="registration_form_password_second">Confirmation du mot de passe</Label>
+                {{ form_widget(registrationForm.password.second, {'attr': {'class':'form-control'}}) }}
+                </div>
+            <div class="mb-4 ">    
+                {{ form_widget(registrationForm.agreeTerms, {'attr': {'checked': 'checked'}}) }}
+                <Label for="registration_form_agreeTerms">Lire et accepter <a href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> les conditions générales</a></Label>
+                <div class="text-danger">{{ form_errors(registrationForm.agreeTerms) }}</div>
+                <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Les conditions générales de vente</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil beatae ad libero, doloribus temporibus molestiae sint eum facilis repellendus saepe?</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro, eum fugit! Facere quaerat aliquam voluptatum dignissimos iusto. Earum, optio! Atque?</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio a possimus laudantium temporibus esse voluptatem ea, ratione reprehenderit cum totam.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                <div class="mb-4">
+                <input formnovalidate type="submit" class="btn btn-primary shadow w-100" value="S'inscrire">
+                </div>
+    {{ form_end(registrationForm) }}
+                <div class="my-3 text-center">
+                <p>
+                    Vous avez déjà un compte?
+                    <a href="">Connectez-vous</a>
+                </p>
+                <p>
+                    <a href="{{path("visitor_welcome_index")}}">Retour à l'accueil</a>
+                </p>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>
