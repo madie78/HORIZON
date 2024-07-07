@@ -88,7 +88,7 @@
                             <li>
                             <a class="dropdown-item" href="">Espace admin</a>
                             </li>
-                    {# {% endif %} #}
+                        {# {% endif %} #}
                             <li>
                             <a class="dropdown-item" href="">Espace client</a>
                             </li>
@@ -99,7 +99,7 @@
                     </li>
                 </ul>
                     {# {% else %} #}
-                        <a href="" class="btn btn-warning my-3 my-lg-0">Connexion</a>
+                        <a href="{{path('visitor_security_login')}}" class="btn btn-warning my-3 my-lg-0">Connexion</a>
                         <a href="{{path("visitor_registration_register")}}" class="btn btn-light my-3 my-lg-0 mx-lg-2">Inscription</a>
                     {# {% endif %} #}
                 </div>

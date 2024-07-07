@@ -3,12 +3,13 @@
 namespace App\Security;
 
 use App\Entity\User;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
-use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
+use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class EmailVerifier
 {
@@ -46,6 +47,8 @@ class EmailVerifier
         $this->verifyEmailHelper->validateEmailConfirmationFromRequest($request, (string) $user->getId(), $user->getEmail());
 
         $user->setVerified(true);
+        $user->setVerifiedAt(new DateTimeImmutable());
+
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();
