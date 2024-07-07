@@ -89,6 +89,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
 //-----------DATE DE CREATION/MODIFICATION/VERIFICATION------------------
+    #[ORM\Column]
+    private bool $isVerified = false;
+
     #[Gedmo\Timestampable(on: 'create')]
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $createdAt = null;
@@ -100,8 +103,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\Column]
-    private bool $isVerified = false;
+
 
     // ---------Récuperer le tableau des roles et y inserer le role USER
 
@@ -252,7 +254,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->isVerified;
     }
 
-    public function setVerified(bool $isVerified): static
+    public function setIsVerified(bool $isVerified): static
     {
         $this->isVerified = $isVerified;
 
