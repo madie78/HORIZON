@@ -1,0 +1,12 @@
+{% extends "themes/base_admin.html.twig" %}
+
+{% block title %}Espace d'administration{% endblock %}
+
+{% block description %}Espace d'administration, pour les co-createurs du site qui assurent la maintenance et l'innovation du Site Horizon
+{% endblock %}
+
+{% block main %}
+	<h1 class=" text-center my-3 display-5">Espace d'administration</h1>
+
+	<h4 class="text-center mt-5">Bonjour,{{app.user.firstname}}</h4>
+{% endblock %}

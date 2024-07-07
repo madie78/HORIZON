@@ -77,31 +77,31 @@
                         <a class="nav-link text-white" href="{{path("visitor_cart_index")}}"><i class="fa-solid fa-cart-shopping"></i> Mon panier</a>
                     </li>
                 </ul>
-                {# {% if app.user %} #}
+                {% if app.user %}
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                         <a href="" class="nav-link dropdown-toggle" data-bs-toggle ="dropdown" aria-expanded= "false" data-bs-display="static">
-                        {# {{app.user.firstName}} #}
+                            {{app.user.firstName}}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                        {# {% if is granted("ROLE_ADMIN") %} #}
+                            {% if is_granted("ROLE_ADMIN") %}
                             <li>
-                            <a class="dropdown-item" href="">Espace admin</a>
+                            <a class="dropdown-item" href="{{path("admin_home_index")}}">Espace admin</a>
                             </li>
-                        {# {% endif %} #}
+                            {% endif %}
                             <li>
-                            <a class="dropdown-item" href="">Espace client</a>
+                            <a class="dropdown-item" href="#">Espace client</a>
                             </li>
                             <li>
-                            <a class="dropdown-item" href="">Déconnexion</a>
+                            <a class="dropdown-item" href="{{path("app_logout")}}">Déconnexion</a>
                             </li>
                         </ul>
                     </li>
                 </ul>
-                    {# {% else %} #}
-                        <a href="{{path('visitor_security_login')}}" class="btn btn-warning my-3 my-lg-0">Connexion</a>
-                        <a href="{{path("visitor_registration_register")}}" class="btn btn-light my-3 my-lg-0 mx-lg-2">Inscription</a>
-                    {# {% endif %} #}
+                    {% else %}
+                    <a href="{{path('visitor_security_login')}}" class="btn btn-warning my-3 my-lg-0">Connexion</a>
+                    <a href="{{path("visitor_registration_register")}}" class="btn btn-light my-3 my-lg-0 mx-lg-2">Inscription</a>
+                    {% endif %}
                 </div>
             </div>
         </nav>
