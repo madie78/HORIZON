@@ -1,0 +1,11 @@
+{% extends "themes/base_user.html.twig" %}
+
+{% block title %}Espace client{% endblock %}
+
+{% block description %}Horizon, entreprise de ecommerce spécialisée dans la vente de maquette.{% endblock %}
+
+{% block keywords %}Horizon, Qui sommes-nous, Pour les neophytes de la maquette{% endblock %}
+
+{% block main %}
+    <h1 class="text-center my-3 display-5">Bienvenue, sur votre Espace client {{app.user.firstName}}</h1>
+{% endblock %}
