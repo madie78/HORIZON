@@ -1,0 +1,33 @@
+{% extends "themes/base_admin.html.twig" %}
+
+{% block title %}Nouvelles catégories
+{% endblock %}
+
+{% block description %}Nouvelle catégorie du Site Horizon
+{% endblock %}
+
+{% block main %}
+	<h1 class=" text-center  my-3 display-5">nouvelles catégories</h1>
+
+	<div class="container-fluid mt-5">
+		<div class="row">
+			<div class="col-md-8 col-lg-6 mx-auto">
+				{{form_start(form)}}
+				<div class="mb-3">
+					<label for="category_form_name">Nom<span class="text-danger">*</span>
+					</label>
+					<div class="text-danger">{{ form_errors(form.name) }}</div>
+					{{ form_widget(form.name,{'attr':{'class':'form-control', 'autofocus':'autofocus'}}) }}
+				</div>
+				<div class="mb-3">
+					<label for="category_form_description">Description</label>
+					{{ form_widget(form.description,{'attr':{'class':'form-control', 'rows':10}}) }}
+				</div>
+				<div class="mb-3">
+					<input formnovalidate type="submit" class="btn btn-warning" value="Créer">
+				</div>
+				{{ form_end(form) }}
+			</div>
+		</div>
+	</div>
+{% endblock %}
