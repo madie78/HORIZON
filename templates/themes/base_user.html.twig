@@ -1,52 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
-
-        {#============ ENCODAGE DES CARACTERES======#}
+        {# Encodage des caractères #}
         <meta charset="UTF-8">
 
-        {#=========Minimum de responsive design======#}
+        {# Minimum de responsive design #}
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        {#============ TITRE DE LA PAGE===============#}
-        <title>{% block title %}{% endblock %}-Horizon</title>
-        
-        {# ==============SEO================ #}
-        <meta name="robots" content ="index, allow">
-        <meta name="description" content ="{% block description %}{% endblock %}">
-        <meta name="keywords" content ="{% block keywords %}{% endblock %}">
-        
-        {#===============FAVICON=============#}
-        {# {# <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"> #}
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-        <link rel="manifest" href="/site.webmanifest">
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-        <meta name="msapplication-TileColor" content="#da532c">
-        <meta name="theme-color" content="#ffffff">
-        
-        {#============ FONT AWESOME=========#}
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        
-        {#============ GOGGLE FONT=========#}
+
+        {# Le titre de la page #}
+        <title>{% block title %}{% endblock %} - Horizon</title>
+
+        {# La description de la page #}
+        <meta name="description" content="{% block description %}{% endblock %}">
+
+        <meta name="keywords" content="{% block keywords %}{% endblock %}">
+
+        {# La favicon #}
+
+
+        {# Font awesome #}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        {# Google Font #}
         <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Rampart+One&display=swap" rel="stylesheet">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 
-
-        {# =========APRES INTALLATION DE WEBPACKENCORE========= #}
+        {# Chargement de bootstrap de de ma feuille de style #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
+        {# Chargement du js #}
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
+        
     </head>
+	
     <body class="body-visitor">
         {# Barre de navigation #}
-        <nav class="navbar navbar-expand-lg bg-primary navbar-dark shadow-sm fixed-top">
+     <nav class="navbar navbar-expand-lg bg-primary navbar-dark shadow-sm fixed-top">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{path("visitor_welcome_index")}}"><span class="text-warning display-6">H<i class="fa-regular fa-sun"></i>rizon</span></a>
                 
@@ -90,9 +84,6 @@
                             </li>
                             {% endif %}
                             <li>
-                            <a class="dropdown-item" href="{{path("user_home_index")}}">Espace client</a>
-                            </li>
-                            <li>
                             <a class="dropdown-item" href="{{path("app_logout")}}">Déconnexion</a>
                             </li>
                         </ul>
@@ -105,12 +96,31 @@
                 </div>
             </div>
         </nav>
-
-        {# ===LE CONTENU SPECIFIQUE POUR CHAQUE PAGE=== #}
-        <main class="container-fluid mt-5">
-        {% block main %}{% endblock %}
-        </main>
-        {# ==============Pied de page=================== #}
+		 {# Contenu spécifique à chaque page #}
+		<main class="container-fluid my-5">
+		<div class="row my-5">
+		<div class="col-md-3">
+		<ul class="list-group">
+				<li class="list-group-item d-flex justify-content-between align-items-center">
+					<a class="text-decoration-none text-dark"href="{{path('user_home_index')}}">Mon espace client</a>
+				</li>
+				<li class="list-group-item d-flex justify-content-between align-items-center">
+					Mon profil
+				</li>
+				<li class="list-group-item d-flex justify-content-between align-items-center">
+                <a class="text-decoration-none text-dark" href="#">Mes adresses</a>
+				</li>
+				<li class="list-group-item d-flex justify-content-between align-items-center">
+					Mes commandes
+				</li>
+		</ul>
+		</div>
+		<div class="col-md-9">
+		{% block main %}{% endblock %}
+		</div>
+		</div>
+		</main>
+        {# Le pieds de page #}
         <footer class="text-center bg-dark text-light py-4">
             <div class="container">
                 <div class="row">
